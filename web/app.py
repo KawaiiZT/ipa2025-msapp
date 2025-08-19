@@ -1,7 +1,12 @@
+import os
 from flask import Flask, request, render_template, redirect, url_for
 from pymongo import MongoClient
 from bson import ObjectId
+
 app = Flask(__name__)
+
+db_name = os.environ.get("DB_NAME")
+
 client = MongoClient("mongodb://mongo:27017/")
 db = client["ipa2025_db"]
 routers = db["routers"]
