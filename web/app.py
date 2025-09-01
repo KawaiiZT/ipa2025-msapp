@@ -1,21 +1,16 @@
-import os
-from flask import Flask, request, render_template, redirect, url_for
+from os import environ as env
+from flask import Flask, request, render_template, redirect
 from pymongo import MongoClient
 from bson import ObjectId
 
 app = Flask(__name__)
-
-db_name = os.environ.get("DB_NAME")
-
-client = MongoClient("mongodb://mongo:27017/")
-db = client["ipa2025_db"]
+client = MongoClient(env.get("MONGO_URI"))
+db = client[env.get("DB_NAME")]
 routers = db["routers"]
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
-    data = []
-    for x in routers.find():
-        data.append(x)
+    data = list(routers.find())
     return render_template("index.html", routers=data)
 
 @app.route("/add", methods=["POST"])
@@ -23,14 +18,13 @@ def add_router():
     ip = request.form.get("ip")
     username = request.form.get("username")
     password = request.form.get("password")
+
     if ip and username and password:
-        routers.insert_one(
-            {
-                "ip": ip,
-                "username": username,
-                "password": password
-            }
-        )
+        routers.insert_one({
+            "ip": ip,
+            "username": username,
+            "password": password
+        })
     return redirect("/")
 
 @app.route("/delete/<id>", methods=["POST"])
@@ -39,4 +33,4 @@ def delete_router(id):
     return redirect("/")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+    app.run(debug=True, host="0.0.0.0", port=8080)

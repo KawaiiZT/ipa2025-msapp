@@ -9,6 +9,10 @@ services:
       - app-net
     env_file:
       - .env
+    environment:
+      MONGO_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/
+      DB_NAME: ${DB_NAME}
+
   mongo:
     image: mongo:6
     ports:
@@ -17,6 +21,20 @@ services:
       - mongo-data:/data/db
     networks:
       - app-net
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+  
+  scheduler:
+    build: ./scheduler
+    container_name: scheduler
+    env_file:
+      - .env
+    depends_on:
+      mongo:
+    networks:
+      - app-net
+
 volumes:
   mongo-data:
   
