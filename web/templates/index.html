@@ -18,7 +18,7 @@
     <ul>
         {% for r in routers %}
         <li>
-            {{ r.ip }} - {{ r.username }}
+             <a href="/router/{{ r.ip }}" style="margin-left:8px;">{{ r.ip }}</a> - {{ r.username }}
             <form method="POST" action="{{ url_for('delete_router',id = r._id) }}" style="display:inline">
                 <input type="hidden" name="id" value="{{ loop.index0 }}" />
                 <button type="submit">Delete</button>

@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <title>Sample app</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+    <h1>Router: {{ routers_ip }}</h1>
+    <table style="width:100%">
+  <tr>
+    <th>Timestamp</th>
+    <th>Interface</th>
+    <th>IP Address</th>
+    <th>Status</th>
+    <th>Protocol</th>
+  </tr>
+  {% for docs in interface_data %}
+    {% for in in docs.interface %}
+    <tr>
+        <td>docs.timestamp</td>
+        <td>in.interface</td>
+        <td>in.ip</td>
+        <td>in.status</td>
+        <td>in.proto</td>
+    </tr>
+    {% endfor %}
+  {% endfor %}
+</table>
+</body>
+
+</html>

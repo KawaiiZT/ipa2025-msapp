@@ -51,6 +51,23 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+
+  worker:
+    build: ./worker
+    depends_on:
+      - rabbitmq
+      - mongo
+      - scheduler
+    networks:
+      - app-net
+    env_file:
+      - .env
+
+    environment:
+      MONGO_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/
+      DB_NAME: ${DB_NAME}
+      RABBITMQ: rabbitmq
+
 volumes:
   mongo-data:
 
