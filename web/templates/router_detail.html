@@ -6,7 +6,8 @@
 </head>
 
 <body>
-    <h1>Router: {{ routers_ip }}</h1>
+    <h1>Router: {{ router_ip }}</h1>
+
     <table style="width:100%">
   <tr>
     <th>Timestamp</th>
@@ -16,13 +17,14 @@
     <th>Protocol</th>
   </tr>
   {% for docs in interface_data %}
-    {% for in in docs.interface %}
+        {{ docs }}
+    {% for inth in docs.interfaces %}
     <tr>
-        <td>docs.timestamp</td>
-        <td>in.interface</td>
-        <td>in.ip</td>
-        <td>in.status</td>
-        <td>in.proto</td>
+        <td>{{ docs.timestamp }}</td>
+        <td>{{ inth.interface }}</td>
+        <td>{{ inth.ip }}</td>
+        <td>{{ inth.status }}</td>
+        <td>{{ inth.proto }}</td>
     </tr>
     {% endfor %}
   {% endfor %}
