@@ -17,12 +17,11 @@
     <th>Protocol</th>
   </tr>
   {% for docs in interface_data %}
-        {{ docs }}
     {% for inth in docs.interfaces %}
     <tr>
         <td>{{ docs.timestamp }}</td>
         <td>{{ inth.interface }}</td>
-        <td>{{ inth.ip }}</td>
+        <td>{{ inth.ip_address }}</td>
         <td>{{ inth.status }}</td>
         <td>{{ inth.proto }}</td>
     </tr>
