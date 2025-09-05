@@ -1,5 +1,9 @@
+import ntc_templates
+import os
+import json
+
 from netmiko import ConnectHandler
-import ntc_templates, os, json
+
 
 def get_interfaces(ip, username, password):
 
@@ -19,8 +23,9 @@ def get_interfaces(ip, username, password):
         result = conn.send_command("show ip int br", use_textfsm=True)
         conn.disconnect()
 
-    return(json.dumps(result, indent=2))
+    print(json.dumps(result, indent=2))
+    return result
 
 
-if __name__=='__main__':
-    get_interfaces(ip, username, password)
+if __name__ == "__main__":
+    get_interfaces()

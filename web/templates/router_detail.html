@@ -1,33 +1,28 @@
+<!DOCTYPE html>
 <html>
-
-<head>
-    <title>Sample app</title>
-    <link rel="stylesheet" href="/static/style.css" />
-</head>
-
+<head><title>Router Detail</title></head>
+<link rel="stylesheet" href="/static/style.css" />
 <body>
-    <h1>Router: {{ router_ip }}</h1>
-
-    <table style="width:100%">
-  <tr>
-    <th>Timestamp</th>
-    <th>Interface</th>
-    <th>IP Address</th>
-    <th>Status</th>
-    <th>Protocol</th>
-  </tr>
-  {% for docs in interface_data %}
-    {% for inth in docs.interfaces %}
+  <h1>Router: {{ router_ip }}</h1>
+  <table border="1">
     <tr>
-        <td>{{ docs.timestamp }}</td>
-        <td>{{ inth.interface }}</td>
-        <td>{{ inth.ip_address }}</td>
-        <td>{{ inth.status }}</td>
-        <td>{{ inth.proto }}</td>
+      <th>Timestamp</th>
+      <th>Interface</th>
+      <th>IP Address</th>
+      <th>Status</th>
+      <th>Protocol</th>
     </tr>
+    {% for doc in interface_data %}
+      {% for intf in doc.interfaces %}
+      <tr>
+        <td>{{ doc.timestamp }}</td>
+        <td>{{ intf.interface }}</td>
+        <td>{{ intf.ip_address }}</td>
+        <td>{{ intf.status }}</td>
+        <td>{{ intf.proto }}</td>
+      </tr>
+      {% endfor %}
     {% endfor %}
-  {% endfor %}
-</table>
+  </table>
 </body>
-
 </html>
