@@ -42,10 +42,10 @@ jobs:
 
     - name: Build & Push Docker Images
       run: |
-        docker build -t KawaiiZT/worker:latest ./worker
-        docker build -t KawaiiZT/scheduler:latest ./scheduler
-        docker build -t KawaiiZT/web:latest ./web
+        docker build -t kawaiizt/worker:latest ./worker
+        docker build -t kawaiizt/scheduler:latest ./scheduler
+        docker build -t kawaiizt/web:latest ./web
 
-        docker push KawaiiZT/worker:latest
-        docker push KawaiiZT/scheduler:latest
-        docker push KawaiiZT/web:latest
+        docker push kawaiizt/worker:latest
+        docker push kawaiizt/scheduler:latest
+        docker push kawaiizt/web:latest
