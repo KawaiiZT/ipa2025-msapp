@@ -27,8 +27,13 @@ def add_router():
     password = request.form.get("password")
 
     if ip and username and password:
-        routers.insert_one({"ip": ip, "username": username,
-"password": password})
+        routers.insert_one(
+            {
+                "ip": ip,
+                "username": username,
+                "password": password
+            }
+        )
     return redirect("/")
 
 
@@ -46,7 +51,7 @@ def router_detail(ip):
         .sort("timestamp", -1)
         .limit(3)
     )
-    
+
     return render_template(
         "router_detail.html",
         router_ip=ip,
