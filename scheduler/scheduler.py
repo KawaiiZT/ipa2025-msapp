@@ -5,6 +5,7 @@ from producer import produce
 from database import get_router_info
 a = "rabbitmq"
 
+
 def scheduler():
 
     INTERVAL = 300.0
