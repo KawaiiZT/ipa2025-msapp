@@ -27,13 +27,7 @@ def add_router():
     password = request.form.get("password")
 
     if ip and username and password:
-        routers.insert_one(
-            {
-                "ip": ip,
-                "username": username,
-                "password": password
-            }
-        )
+        routers.insert_one({"ip": ip, "username": username, "password": password})
     return redirect("/")
 
 
@@ -45,11 +39,7 @@ def delete_router(id):
 
 @app.route("/router/<ip>", methods=["GET"])
 def router_detail(ip):
-    docs = (
-        interface_status.find({"router_ip": ip})
-        .sort("timestamp", -1)
-        .limit(3)
-    )
+    docs = interface_status.find({"router_ip": ip}).sort("timestamp", -1).limit(3)
 
     return render_template(
         "router_detail.html",

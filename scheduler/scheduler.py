@@ -3,6 +3,7 @@ import time
 from bson import json_util
 from producer import produce
 from database import get_router_info
+
 a = "rabbitmq"
 
 
