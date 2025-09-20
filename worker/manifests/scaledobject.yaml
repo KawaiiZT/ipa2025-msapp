@@ -5,18 +5,15 @@ metadata:
   namespace: ipa2025
 spec:
   scaleTargetRef:
+    kind: Deployment
     name: ipa2025-msapp-worker
-  pollingInterval: 15
-  cooldownPeriod: 120
   minReplicaCount: 1
   maxReplicaCount: 10
   triggers:
-    - type: rabbitmq
-      metadata:
-        queueName: router_jobs
-        mode: QueueLength
-        value: "10"
-        protocol: auto
-        hostFromEnv: RABBITMQ_HOST
-        usernameFromEnv: RABBITMQ_DEFAULT_USER
-        passwordFromEnv: RABBITMQ_DEFAULT_PASS
+  - type: rabbitmq
+    metadata:
+      protocol: amqp
+      queueName: router_jobs
+      mode: QueueLength
+      value: "10"
+      hostFromEnv: RABBITMQ_CONN
